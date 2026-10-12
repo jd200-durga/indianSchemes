@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { SCHEMES, STATES, CATEGORIES } from "@/data/schemes";
+import { useAuth } from "@/hooks/useAuth";
 
 const TITLE = "Indian Schemes — State & Central Government Schemes, Eligibility & Apply Links";
 const DESC =
@@ -41,6 +42,7 @@ const CAT_COLOR: Record<string, string> = {
 };
 
 function Index() {
+  const { user, profile, signOut } = useAuth();
   const [q, setQ] = useState("");
   const [state, setState] = useState("All");
   const [cat, setCat] = useState("All");
@@ -59,9 +61,28 @@ function Index() {
     <div className="min-h-screen">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Logo />
-        <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener noreferrer" className="hidden text-sm font-semibold text-muted-foreground hover:text-primary sm:block">
-          myScheme.gov.in ↗
-        </a>
+        <div className="flex items-center gap-3">
+          <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener noreferrer" className="hidden text-sm font-semibold text-muted-foreground hover:text-primary sm:block">
+            myScheme.gov.in ↗
+          </a>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <span className="hidden max-w-40 truncate text-sm font-semibold sm:block">
+                Namaste, {profile?.full_name || user.email}
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="rounded-full border-2 border-foreground px-4 py-1.5 text-sm font-bold hover:bg-foreground hover:text-background"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <Link to="/auth" className="bg-brand rounded-full px-5 py-2 text-sm font-bold text-primary-foreground">
+              Sign in
+            </Link>
+          )}
+        </div>
       </header>
 
       <main>
