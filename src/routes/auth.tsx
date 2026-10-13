@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { supabase } from "@/integrations/supabase/client";
 import { STATES } from "@/data/schemes";
+import { PasswordChecklist, passwordValid } from "@/lib/password";
 
 const TITLE = "Sign in — Indian Schemes";
 const DESC = "Sign in or create your Indian Schemes account with your email and password to save your details.";
@@ -24,19 +25,37 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+  const [mode, setMode] = useState<"signin" | "signup" | "forgot">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [state, setState] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [checkEmail, setCheckEmail] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setBusy(true);
     setError(null);
+    setInfo(null);
+
+    if (mode === "forgot") {
+      setBusy(true);
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      setBusy(false);
+      if (error) setError(error.message);
+      else setInfo(`If an account exists for ${email}, a reset link has been sent. Check your inbox.`);
+      return;
+    }
+
+    if (mode === "signup" && !passwordValid(password)) {
+      setError("Please follow all the password rules shown below the password box.");
+      return;
+    }
+    setBusy(true);
 
     if (mode === "signup") {
       const { data, error } = await supabase.auth.signUp({
@@ -93,14 +112,16 @@ function AuthPage() {
             </div>
           ) : (
             <>
-              <h1 className="text-3xl font-extrabold">{mode === "signin" ? "Welcome back" : "Create your account"}</h1>
+              <h1 className="text-3xl font-extrabold">{mode === "signin" ? "Welcome back" : mode === "signup" ? "Create your account" : "Forgot password"}</h1>
               <p className="mt-1 text-sm text-muted-foreground">
                 {mode === "signin"
                   ? "Sign in with your email and password."
-                  : "Sign up once — your details are saved for next time."}
+                  : mode === "signup"
+                    ? "Sign up once — your details are saved for next time."
+                    : "Enter your email. We'll send a link to set a new password."}
               </p>
 
-              <div className="mt-5 grid grid-cols-2 gap-2 rounded-full bg-secondary p-1">
+              <div className={`mt-5 grid grid-cols-2 gap-2 rounded-full bg-secondary p-1 ${mode === "forgot" ? "hidden" : ""}`}>
                 {(["signin", "signup"] as const).map((m) => (
                   <button
                     key={m}
@@ -159,19 +180,28 @@ function AuthPage() {
                     className="mt-1 w-full rounded-xl border-2 bg-background px-4 py-3 font-normal outline-none focus:border-primary"
                   />
                 </label>
+                {mode !== "forgot" && (
                 <label className="text-sm font-semibold">
                   Password
                   <input
                     required
                     type="password"
-                    minLength={6}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="At least 6 characters"
+                    placeholder={mode === "signup" ? "e.g. Ravi@_2024" : "Your password"}
                     className="mt-1 w-full rounded-xl border-2 bg-background px-4 py-3 font-normal outline-none focus:border-primary"
                   />
+                  {mode === "signup" && <PasswordChecklist password={password} />}
                 </label>
+                )}
 
+                {mode === "signin" && (
+                  <button type="button" onClick={() => { setMode("forgot"); setError(null); }} className="-mt-2 self-end text-sm font-bold text-primary hover:underline">
+                    Forgot password?
+                  </button>
+                )}
+
+                {info && <p className="rounded-xl bg-secondary px-4 py-2 text-sm font-semibold">{info}</p>}
                 {error && <p className="rounded-xl bg-destructive/10 px-4 py-2 text-sm font-semibold text-destructive">{error}</p>}
 
                 <button
@@ -179,8 +209,13 @@ function AuthPage() {
                   disabled={busy}
                   className="bg-brand rounded-full px-4 py-3 font-bold text-primary-foreground transition hover:opacity-90 disabled:opacity-60"
                 >
-                  {busy ? "Please wait…" : mode === "signin" ? "Sign in" : "Create account"}
+                  {busy ? "Please wait…" : mode === "signin" ? "Sign in" : mode === "signup" ? "Create account" : "Send reset link"}
                 </button>
+                {mode === "forgot" && (
+                  <button type="button" onClick={() => { setMode("signin"); setInfo(null); setError(null); }} className="text-sm font-bold text-muted-foreground hover:text-primary">
+                    ← Back to sign in
+                  </button>
+                )}
               </form>
             </>
           )}
