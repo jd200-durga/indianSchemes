@@ -102,3 +102,7 @@
 @keyframes shimmer { to { background-position: 200% center; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes pulse-scale { 50% { transform: scale(0.94); } }
+
+/* Hide Google Translate banner/tooltip */
+.goog-te-banner-frame, .skiptranslate iframe, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
