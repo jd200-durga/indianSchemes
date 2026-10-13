@@ -27,7 +27,7 @@ const ASKED = "is_lang_asked";
 
 function getCurrent(): string {
   const m = document.cookie.match(/googtrans=\/en\/([^;]+)/);
-  return m ? m[1] : "en";
+  return m?.[1] ?? "en";
 }
 
 function applyLanguage(code: string) {
@@ -47,8 +47,8 @@ function applyLanguage(code: string) {
 function loadGoogleTranslate() {
   if (document.getElementById("gt-script")) return;
   const w = window as unknown as Record<string, unknown>;
-  w.googleTranslateElementInit = () => {
-    const g = (w.google as { translate: { TranslateElement: new (o: object, id: string) => void } });
+  w["googleTranslateElementInit"] = () => {
+    const g = (w["google"] as { translate: { TranslateElement: new (o: object, id: string) => void } });
     new g.translate.TranslateElement({ pageLanguage: "en", autoDisplay: false }, "gt-element");
   };
   const s = document.createElement("script");
@@ -76,7 +76,7 @@ export function LanguageSwitcher() {
     }
   }, [user]);
 
-  const cur = LANGUAGES.find((l) => l.code === current) ?? LANGUAGES[0];
+  const cur = LANGUAGES.find((l) => l.code === current) ?? LANGUAGES[0]!;
 
   return (
     <>
