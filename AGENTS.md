@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep scheme application instructions in a browser-safe data module keyed by scheme slug, with official source links and explicit online/assisted channels; this lets every scheme detail page share one guide presentation without implying universal online enrollment.
