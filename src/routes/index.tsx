@@ -62,9 +62,6 @@ function Index() {
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <Logo />
         <div className="flex items-center gap-3">
-          <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener noreferrer" className="hidden text-sm font-semibold text-muted-foreground hover:text-primary sm:block">
-            myScheme.gov.in ↗
-          </a>
           {user ? (
             <div className="flex items-center gap-2">
               <span className="hidden max-w-40 truncate text-sm font-semibold sm:block">
