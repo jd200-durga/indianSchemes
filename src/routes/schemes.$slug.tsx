@@ -1,6 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Logo } from "@/components/Logo";
 import { SCHEMES } from "@/data/schemes";
+import { APPLICATION_GUIDES } from "@/data/application-guides";
+import { ApplicationGuide } from "@/components/ApplicationGuide";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/schemes/$slug")({
   loader: ({ params }) => {
@@ -12,7 +15,7 @@ export const Route = createFileRoute("/schemes/$slug")({
     if (!loaderData) return { meta: [{ title: "Scheme not found — Indian Schemes" }, { name: "robots", content: "noindex" }] };
     const s = loaderData.scheme;
     const title = `${s.name} (${s.state}) — Eligibility & Apply | Indian Schemes`;
-    const desc = `${s.name}: ${s.benefit}. Check eligibility, documents needed and apply on the official website.`;
+    const desc = `${s.name}: ${s.benefit}. Check eligibility, required documents and step-by-step application guidance for the official service.`;
     return {
       meta: [
         { title },
@@ -50,6 +53,7 @@ export const Route = createFileRoute("/schemes/$slug")({
 
 function SchemePage() {
   const { scheme: s } = Route.useLoaderData();
+  const guide = APPLICATION_GUIDES[s.slug];
   return (
     <div className="min-h-screen">
       <header className="mx-auto max-w-4xl px-4 py-5"><Logo /></header>
@@ -77,9 +81,13 @@ function SchemePage() {
           </section>
         </div>
 
-        <a href={s.applyUrl} target="_blank" rel="noopener noreferrer" className="bg-brand mt-8 block rounded-full px-6 py-4 text-center text-lg font-extrabold text-primary-foreground shadow-xl">
-          Apply on official website ↗
-        </a>
+        {guide && <ApplicationGuide guide={guide} />}
+
+        <Button asChild className="bg-brand mt-8 h-auto w-full whitespace-normal rounded-full px-6 py-4 text-center text-lg font-extrabold text-primary-foreground shadow-xl">
+          <a href={s.applyUrl} target="_blank" rel="noopener noreferrer">
+            Apply on official website ↗
+          </a>
+        </Button>
         <p className="mt-3 text-center text-sm text-muted-foreground">Opens {new URL(s.applyUrl).hostname}. Rules may change — confirm on the official portal.</p>
       </main>
     </div>
