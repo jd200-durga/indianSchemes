@@ -8,6 +8,7 @@ describe("Scheme application guidance", () => {
     for (const scheme of SCHEMES) {
       const guide = APPLICATION_GUIDES[scheme.slug];
       expect(guide, scheme.name).toBeDefined();
+      if (!guide) throw new Error(`Missing guide for ${scheme.name}`);
       expect(guide.steps.length).toBeGreaterThanOrEqual(5);
       expect(guide.channel.length).toBeGreaterThan(20);
       expect(guide.notice.length).toBeGreaterThan(40);
@@ -23,9 +24,9 @@ describe("Scheme application guidance", () => {
   });
 
   it("identifies assisted registration rather than suggesting self-service for institutional schemes", () => {
-    expect(APPLICATION_GUIDES["pm-vishwakarma"].channel).toContain("CSC");
-    expect(APPLICATION_GUIDES["kanyashree-west-bengal"].channel).toContain("institution");
-    expect(APPLICATION_GUIDES["ntr-bharosa-pension-ap"].channel).toContain("secretariat");
-    expect(APPLICATION_GUIDES["pm-mudra-yojana"].notice).toContain("not a direct loan");
+    expect(APPLICATION_GUIDES["pm-vishwakarma"]?.channel).toContain("CSC");
+    expect(APPLICATION_GUIDES["kanyashree-west-bengal"]?.channel).toContain("institution");
+    expect(APPLICATION_GUIDES["ntr-bharosa-pension-ap"]?.channel).toContain("secretariat");
+    expect(APPLICATION_GUIDES["pm-mudra-yojana"]?.notice).toContain("not a direct loan");
   });
 });
