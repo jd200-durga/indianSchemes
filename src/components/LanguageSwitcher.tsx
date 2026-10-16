@@ -84,7 +84,7 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Choose language"
-        className="notranslate bg-brand fixed bottom-5 right-5 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full text-primary-foreground shadow-2xl ring-4 ring-background transition hover:scale-110"
+        className="notranslate bg-brand-live fixed bottom-5 right-5 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full text-primary-foreground shadow-2xl ring-4 ring-background transition hover:scale-110"
       >
         <span className="text-xl leading-none">अ</span>
         <span className="text-[10px] font-bold uppercase">{cur.code}</span>

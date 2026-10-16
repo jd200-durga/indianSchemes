@@ -75,7 +75,7 @@ function Index() {
               </button>
             </div>
           ) : (
-            <Link to="/auth" className="bg-brand rounded-full px-5 py-2 text-sm font-bold text-primary-foreground">
+            <Link to="/auth" className="bg-brand-live rounded-full px-5 py-2 text-sm font-bold text-primary-foreground">
               Sign in
             </Link>
           )}

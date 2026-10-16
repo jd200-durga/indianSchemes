@@ -66,6 +66,7 @@
   --leaf: oklch(0.65 0.18 145);
   --sun: oklch(0.86 0.17 90);
   --brand-solid: oklch(0.48 0.19 355);
+  --gradient-brand: linear-gradient(110deg, var(--saffron), var(--magenta) 50%, var(--teal));
 }
 
 @layer base {
@@ -84,6 +85,11 @@
 @utility bg-brand {
   background: var(--brand-solid);
 }
+@utility bg-brand-live {
+  background: var(--gradient-brand);
+  background-size: 200% auto;
+  animation: shimmer 8s linear infinite;
+}
 @utility logo-spin {
   transform-origin: 24px 24px;
   animation: spin 10s linear infinite;
@@ -93,6 +99,7 @@
   animation: pulse-scale 3s ease-in-out infinite;
 }
 
+@keyframes shimmer { to { background-position: 200% center; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes pulse-scale { 50% { transform: scale(0.94); } }
 
