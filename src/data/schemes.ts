@@ -1,14 +1,5 @@
-export type Scheme = {
-  slug: string;
-  name: string;
-  state: string;
-  category: "Agriculture" | "Health" | "Women" | "Education" | "Housing" | "Pension" | "Business" | "Energy";
-  benefit: string;
-  summary: string;
-  eligibility: string[];
-  documents: string[];
-  applyUrl: string;
-};
+import type { Scheme } from "./scheme-types";
+export type { Scheme } from "./scheme-types";
 
 export const SCHEMES: Scheme[] = [
   {
