@@ -1,4 +1,7 @@
 import type { Scheme } from "./scheme-types";
+import { TELANGANA_ENTRIES } from "./telangana-schemes";
+import { TELANGANA_WELFARE_ENTRIES } from "./telangana-welfare-schemes";
+import { ADDITIONAL_STATE_ENTRIES } from "./additional-state-schemes";
 export type { Scheme } from "./scheme-types";
 
 export const SCHEMES: Scheme[] = [
@@ -119,7 +122,7 @@ export const SCHEMES: Scheme[] = [
     category: "Women",
     benefit: "One-time marriage assistance of ₹1,00,116",
     summary: "Financial support for the marriage of girls from low-income families.",
-    eligibility: ["Bride is a resident of Telangana", "Bride aged 18+ at marriage", "Family income below ₹2 lakh (urban) / ₹1.5 lakh (rural)"],
+    eligibility: ["Bride is a resident of Telangana", "Bride aged 18+ at marriage", "SC/ST or minority family income up to ₹2 lakh; BC/EBC up to ₹2 lakh urban / ₹1.5 lakh rural", "Current community-specific ePASS rules apply"],
     documents: ["Aadhaar of bride & mother", "Income & caste certificate", "Marriage proof", "Bank details"],
     applyUrl: "https://telanganaepass.cgg.gov.in",
   },
@@ -200,6 +203,9 @@ export const SCHEMES: Scheme[] = [
     documents: ["Aadhaar card", "Residence certificate", "Marksheets", "Admission proof"],
     applyUrl: "https://www.7nishchay-yuvaupmission.bihar.gov.in",
   },
+  ...TELANGANA_ENTRIES.map((entry) => entry.scheme),
+  ...TELANGANA_WELFARE_ENTRIES.map((entry) => entry.scheme),
+  ...ADDITIONAL_STATE_ENTRIES.map((entry) => entry.scheme),
 ];
 
 export const STATES = Array.from(new Set(SCHEMES.map((s) => s.state))).sort((a, b) =>
