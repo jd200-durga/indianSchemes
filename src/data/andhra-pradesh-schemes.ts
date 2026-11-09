@@ -1,10 +1,12 @@
 import { catalogEntry, type CatalogEntry } from "./catalog-entry";
+import type { ApplicationGuide } from "./application-guide-types";
 import type { Scheme } from "./scheme-types";
 
 type AndhraPradeshRecord = Scheme & {
   channel: string;
   notice: string;
   actions: [string, string, string, string, string];
+  sources?: ApplicationGuide["sources"];
 };
 
 const records: AndhraPradeshRecord[] = [
