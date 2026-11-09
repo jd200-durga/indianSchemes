@@ -85,7 +85,7 @@ function SchemePage() {
 
         <Button asChild className="bg-brand mt-8 h-auto w-full whitespace-normal rounded-full px-6 py-4 text-center text-lg font-extrabold text-primary-foreground shadow-xl">
           <a href={s.applyUrl} target="_blank" rel="noopener noreferrer">
-            {s.informationOnly ? "View official scheme information ↗" : "Apply on official website ↗"}
+            {s.actionLabel ? `${s.actionLabel} ↗` : s.informationOnly ? "View official scheme information ↗" : "Apply on official website ↗"}
           </a>
         </Button>
         <p className="mt-3 text-center text-sm text-muted-foreground">Opens {new URL(s.applyUrl).hostname}. Rules may change — confirm on the official portal.</p>

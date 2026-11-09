@@ -14,6 +14,33 @@ describe("Expanded scheme catalog", () => {
     }
   });
 
+  it("includes Andhra Pradesh state programmes with clear non-application actions and official guides", () => {
+    const apSchemes = SCHEMES.filter((scheme) => scheme.state === "Andhra Pradesh");
+    for (const slug of [
+      "ntr-bharosa-pension-ap",
+      "stree-shakti-andhra-pradesh",
+      "deepam-2-andhra-pradesh",
+      "thalliki-vandanam-andhra-pradesh",
+      "annadata-sukhibhava-andhra-pradesh",
+      "vidya-mitra-school-kit-andhra-pradesh",
+    ]) {
+      const scheme = apSchemes.find((entry) => entry.slug === slug);
+      expect(scheme, slug).toBeDefined();
+      expect(APPLICATION_GUIDES[slug]?.steps.length).toBeGreaterThanOrEqual(5);
+    }
+    for (const slug of [
+      "stree-shakti-andhra-pradesh",
+      "deepam-2-andhra-pradesh",
+      "thalliki-vandanam-andhra-pradesh",
+      "annadata-sukhibhava-andhra-pradesh",
+      "vidya-mitra-school-kit-andhra-pradesh",
+    ]) {
+      const scheme = apSchemes.find((entry) => entry.slug === slug);
+      expect(scheme?.informationOnly).toBe(true);
+      expect(scheme?.actionLabel).toBeTruthy();
+    }
+  });
+
   it("covers every Indian state without claiming an exhaustive list of schemes", () => {
     const states = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"];
     expect(STATES.filter((s) => s !== "All India").sort()).toEqual(states.sort());

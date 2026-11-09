@@ -24,7 +24,7 @@ const records: AndhraPradeshRecord[] = [
     documents: ["Valid identity proof; confirm with APSRTC which documents establish AP domicile"],
     applyUrl: "https://apsrtc.ap.gov.in/coverage.php",
     informationOnly: true,
-    officialLinkLabel: "Check travel rules",
+    actionLabel: "How to use free travel",
     channel: "Use the benefit on eligible APSRTC services; no separate online application is listed by APSRTC.",
     notice: "APSRTC lists covered bus types and exclusions. Carry valid identity proof and confirm which proof is accepted for domicile before travel.",
     actions: [
@@ -50,7 +50,7 @@ const records: AndhraPradeshRecord[] = [
     documents: ["Rice Card number for the official status check", "LPG consumer details if requesting help from the secretariat or Civil Supplies office"],
     applyUrl: "https://bm-sgsw.ap.gov.in/BM/DeepamStatus",
     informationOnly: true,
-    officialLinkLabel: "Check beneficiary status",
+    actionLabel: "Check beneficiary status",
     channel: "Check beneficiary status online; contact the village/ward secretariat or Civil Supplies office for corrections or enrollment questions.",
     notice: "The government status page asks for a Rice Card number. It does not establish that new applications are open; confirm current refill rules with Civil Supplies or your LPG distributor.",
     actions: [
@@ -80,7 +80,7 @@ const records: AndhraPradeshRecord[] = [
     documents: ["Ask the school or junior college which student, guardian and bank records are needed for current-year verification"],
     applyUrl: "https://tirupati.ap.gov.in/departments/education/",
     informationOnly: true,
-    officialLinkLabel: "Verify with the school",
+    actionLabel: "Verify with the school",
     channel: "Ask the student's school or junior college to verify the enrollment and beneficiary record; no open public application form was confirmed.",
     notice: "Official district pages report ₹15,000 assistance and school-based delivery, but a complete current-year eligibility and document checklist was not found. Check with the institution before relying on an amount or intake date.",
     actions: [
@@ -111,7 +111,7 @@ const records: AndhraPradeshRecord[] = [
     documents: ["Aadhaar for the official status check", "Ask the local Agriculture office which land, crop or bank records are currently required"],
     applyUrl: "https://annadathasukhibhava.ap.gov.in/",
     informationOnly: true,
-    officialLinkLabel: "Check eligibility / payment",
+    actionLabel: "Check eligibility and payment",
     channel: "Use the official portal for beneficiary status; contact the local Agriculture Department for record corrections and current enrollment instructions.",
     notice: "The portal combines Annadata Sukhibhava and PM-KISAN status. Do not assume the full payment is an additional state amount or that new self-registration is open.",
     actions: [
@@ -141,7 +141,7 @@ const records: AndhraPradeshRecord[] = [
     documents: ["No separate application checklist was found; confirm the student's enrollment details with the school"],
     applyUrl: "https://markapuram.ap.gov.in/education/",
     informationOnly: true,
-    officialLinkLabel: "Check with the school",
+    actionLabel: "Check with the school",
     channel: "Kit distribution is through schools; ask the class teacher or headmaster about the current distribution list and missing items.",
     notice: "Government district updates describe the kit and report distribution for 2025–26. They do not establish a universal online application or complete class-by-class eligibility rules.",
     actions: [
