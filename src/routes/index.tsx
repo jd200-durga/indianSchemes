@@ -143,7 +143,7 @@ function Index() {
                   Eligibility
                 </Link>
                 <a href={s.applyUrl} target="_blank" rel="noopener noreferrer" className="bg-brand flex-1 rounded-full px-4 py-2 text-center text-sm font-bold text-primary-foreground">
-                  {s.informationOnly ? "Official info ↗" : "Apply ↗"}
+                  {s.actionLabel ? `${s.actionLabel} ↗` : s.informationOnly ? "Official info ↗" : "Apply ↗"}
                 </a>
               </div>
             </article>

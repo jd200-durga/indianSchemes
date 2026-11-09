@@ -9,4 +9,5 @@ export type Scheme = {
   documents: string[];
   applyUrl: string;
   informationOnly?: boolean;
+  actionLabel?: string;
 };

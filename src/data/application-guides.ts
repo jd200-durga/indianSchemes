@@ -2,9 +2,10 @@ import type { ApplicationGuide } from "./application-guide-types";
 import { TELANGANA_ENTRIES } from "./telangana-schemes";
 import { TELANGANA_WELFARE_ENTRIES } from "./telangana-welfare-schemes";
 import { ADDITIONAL_STATE_ENTRIES } from "./additional-state-schemes";
+import { ANDHRA_PRADESH_ENTRIES } from "./andhra-pradesh-schemes";
 
 export const APPLICATION_GUIDES: Record<string, ApplicationGuide> = {
-  ...Object.fromEntries([...TELANGANA_ENTRIES, ...TELANGANA_WELFARE_ENTRIES, ...ADDITIONAL_STATE_ENTRIES].map((entry) => [entry.scheme.slug, entry.guide])),
+  ...Object.fromEntries([...TELANGANA_ENTRIES, ...TELANGANA_WELFARE_ENTRIES, ...ADDITIONAL_STATE_ENTRIES, ...ANDHRA_PRADESH_ENTRIES].map((entry) => [entry.scheme.slug, entry.guide])),
   "pm-kisan": {
     channel: "Apply online, or get help at a Common Service Centre (CSC).",
     notice: "Registration is checked against state land records. Registration alone does not start payments; e-KYC and an Aadhaar-seeded bank account are required.",
