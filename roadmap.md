@@ -16,4 +16,4 @@
 # Tamil Nadu scheme coverage
 - [x] Verify additional Tamil Nadu state schemes and official information/application channels.
 - [x] Add state schemes with eligibility, documents and clear online or assisted application guidance.
-- [ ] Test Tamil Nadu catalog entries, guides, search and state filtering.
+- [x] Test Tamil Nadu catalog entries, guides, search and state filtering.
