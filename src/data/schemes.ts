@@ -3,6 +3,7 @@ import { TELANGANA_ENTRIES } from "./telangana-schemes";
 import { TELANGANA_WELFARE_ENTRIES } from "./telangana-welfare-schemes";
 import { ADDITIONAL_STATE_ENTRIES } from "./additional-state-schemes";
 import { ANDHRA_PRADESH_ENTRIES } from "./andhra-pradesh-schemes";
+import { TAMIL_NADU_ENTRIES } from "./tamil-nadu-schemes";
 export type { Scheme } from "./scheme-types";
 
 export const SCHEMES: Scheme[] = [
@@ -208,6 +209,7 @@ export const SCHEMES: Scheme[] = [
   ...TELANGANA_WELFARE_ENTRIES.map((entry) => entry.scheme),
   ...ADDITIONAL_STATE_ENTRIES.map((entry) => entry.scheme),
   ...ANDHRA_PRADESH_ENTRIES.map((entry) => entry.scheme),
+  ...TAMIL_NADU_ENTRIES.map((entry) => entry.scheme),
 ];
 
 export const STATES = Array.from(new Set(SCHEMES.map((s) => s.state))).sort((a, b) =>
