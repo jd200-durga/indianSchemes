@@ -12,3 +12,8 @@
 - [x] Verify additional Andhra Pradesh state-government schemes and current application routes.
 - [x] Add verified Andhra Pradesh schemes with eligibility, documents and official application guides.
 - [x] Test Andhra Pradesh catalog entries, guides, search and state filtering.
+
+# Tamil Nadu scheme coverage
+- [x] Verify additional Tamil Nadu state schemes and official information/application channels.
+- [x] Add state schemes with eligibility, documents and clear online or assisted application guidance.
+- [x] Test Tamil Nadu catalog entries, guides, search and state filtering.

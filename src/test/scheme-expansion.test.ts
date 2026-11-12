@@ -41,6 +41,28 @@ describe("Expanded scheme catalog", () => {
     }
   });
 
+  it("includes additional Tamil Nadu state schemes with their official application guidance", () => {
+    const tamilNaduSchemes = SCHEMES.filter((scheme) => scheme.state === "Tamil Nadu");
+    const slugs = [
+      "kalaignar-magalir-urimai-tn",
+      "pudhumai-penn-tamil-nadu",
+      "tamil-pudhalvan-tamil-nadu",
+      "tamil-nadu-girl-child-protection",
+      "tamil-nadu-social-security-pensions",
+      "chief-minister-uzhavar-pathukappu-tamil-nadu",
+      "vidiyal-payanam-tamil-nadu",
+    ];
+    for (const slug of slugs) {
+      expect(tamilNaduSchemes.find((scheme) => scheme.slug === slug), slug).toBeDefined();
+      expect(APPLICATION_GUIDES[slug]?.steps.length).toBeGreaterThanOrEqual(5);
+    }
+    expect(tamilNaduSchemes.find((scheme) => scheme.slug === "pudhumai-penn-tamil-nadu")?.benefit).toContain("₹1,000 per month");
+    expect(tamilNaduSchemes.find((scheme) => scheme.slug === "tamil-pudhalvan-tamil-nadu")?.benefit).toContain("₹1,000 per month");
+    for (const slug of ["tamil-nadu-girl-child-protection", "tamil-nadu-social-security-pensions", "chief-minister-uzhavar-pathukappu-tamil-nadu", "vidiyal-payanam-tamil-nadu"]) {
+      expect(tamilNaduSchemes.find((scheme) => scheme.slug === slug)?.informationOnly).toBe(true);
+    }
+  });
+
   it("covers every Indian state without claiming an exhaustive list of schemes", () => {
     const states = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"];
     expect(STATES.filter((s) => s !== "All India").sort()).toEqual(states.sort());
